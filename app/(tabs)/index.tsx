@@ -247,9 +247,9 @@ export default function HomeScreen({ navigation }) {
                                 source={{ uri: getSlide[index] }}  // นำ URL มาแสดงเป็นภาพ
                                 style={{
                                   width: '100%',
-                                  height: '100%',
-                                  resizeMode: 'cover',
-                                  borderRadius: 5,
+                                  aspectRatio: 16 / 6.5, // ใช้อัตราส่วน 16:9 (สามารถเปลี่ยนเป็นอัตราส่วนอื่นได้)
+                                  borderRadius: 6,
+                                  resizeMode: 'cover', // ให้รูปเต็ม box โดยไม่มีการบีบอัด
                                 }}
                               />
                             </View>
