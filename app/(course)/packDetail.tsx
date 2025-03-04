@@ -12,6 +12,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
 
 const { width } = Dimensions.get('window');
+const carouselHeight = width * (6.5 / 16);
 
 const PackDetail = () => {
 
@@ -235,16 +236,16 @@ const styles = StyleSheet.create({
         borderRadius: 50,
     },
     videoImg: {
-        width: 80,
-        height: 60,
-        borderRadius: 10,
-        resizeMode: 'cover',
+        width: '100',
+        aspectRatio: 16 / 9, // ใช้อัตราส่วน 16:9 (สามารถเปลี่ยนเป็นอัตราส่วนอื่นได้)
+        borderRadius: 5,
+        resizeMode: 'cover', // ให้รูปเต็ม box โดยไม่มีการบีบอัด
     },
     courseImage: {
         width: '100%',
-        height: 220,
-        resizeMode: 'cover',
-        borderRadius: 20,
+        aspectRatio: 16 / 9, // ใช้อัตราส่วน 16:9 (สามารถเปลี่ยนเป็นอัตราส่วนอื่นได้)
+        borderRadius: 5,
+        resizeMode: 'cover', // ให้รูปเต็ม box โดยไม่มีการบีบอัด
     },
     detailsContainer: {
         padding: 20,
@@ -329,7 +330,7 @@ const styles = StyleSheet.create({
     lessonItem: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-start',
         marginBottom: 15,
     },
     lessonInfo: {
