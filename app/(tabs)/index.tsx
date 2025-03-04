@@ -386,8 +386,9 @@ const styles = StyleSheet.create({
   },
   imagePro1: {
     width: '100%',
-    height: 100,
+    aspectRatio: 16 / 9, // ใช้อัตราส่วน 16:9 (สามารถเปลี่ยนเป็นอัตราส่วนอื่นได้)
     borderRadius: 10,
+    resizeMode: 'cover', // ให้รูปเต็ม box โดยไม่มีการบีบอัด
     marginBottom: 10,
   },
   row: {
@@ -462,8 +463,9 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: 160,
+    aspectRatio: 16 / 9, // ใช้อัตราส่วน 16:9 (สามารถเปลี่ยนเป็นอัตราส่วนอื่นได้)
     borderRadius: 10,
+    resizeMode: 'cover', // ให้รูปเต็ม box โดยไม่มีการบีบอัด
   },
   badge: {
     position: 'absolute',
