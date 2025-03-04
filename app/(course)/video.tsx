@@ -1,4 +1,4 @@
-import { Image, View, Text, StyleSheet, ScrollView, TouchableOpacity, Platform, Alert } from 'react-native';
+import { Image, View, Text, StyleSheet, ScrollView, Dimensions, TouchableOpacity, Platform, Alert } from 'react-native';
 import React, { useState, useEffect, useRef, useCallback  } from 'react';
 import { useRouter, useLocalSearchParams, useFocusEffect } from 'expo-router';
 import { useNavigation } from '@react-navigation/native';
@@ -9,6 +9,9 @@ import axios from 'axios';
 import * as ScreenCapture from 'expo-screen-capture';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useVideoPlayer, VideoView } from 'expo-video';
+
+const { width: screenWidth } = Dimensions.get('window');
+const carouselHeight = screenWidth * (8.8 / 16);
 
 export default function VideoScreen() {
     const router = useRouter();
@@ -362,7 +365,7 @@ const styles = StyleSheet.create({
         }),
     },
     video: {
-        height: 250,
+        height: carouselHeight,
         width: '100%',
     },
     lessonSection: {
