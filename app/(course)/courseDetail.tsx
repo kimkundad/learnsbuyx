@@ -12,6 +12,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
 
 const { width } = Dimensions.get('window');
+const carouselHeight = width * (9 / 16);
 
 const CourseDetail = () => {
 
@@ -302,7 +303,7 @@ const styles = StyleSheet.create({
     },
     video: {
         width: '100%',
-        height: 220,
+        height: carouselHeight,
         borderRadius: 20,
     },
     playIcon: {
@@ -324,7 +325,7 @@ const styles = StyleSheet.create({
     },
     courseImage: {
         width: '100%',
-        height: 220,
+        height: carouselHeight,
         resizeMode: 'cover',
         borderRadius: 20,
     },
