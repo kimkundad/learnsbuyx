@@ -26,6 +26,7 @@ const MethodDetail = () => {
 
     useEffect(() => {
         if (params?.data) {
+            console.log('params?.data', params?.data)
             try {
                 const parsedData = JSON.parse(params.data); // แปลงกลับเป็น object
                 setPaymentData(parsedData);
@@ -424,7 +425,10 @@ boxItemListPay: {
             fontSize: 18
         },
         headerGradient: {
-            height: 85,
+            height: Platform.select({
+                ios: 85,
+                android: 55,
+            }),
             width: '100%',
         },
         textListHead: {
@@ -437,7 +441,7 @@ boxItemListPay: {
         listItemCon: {
             marginTop: Platform.select({
                 ios: 35,
-                android: 35,
+                android: 10,
             }),
             paddingHorizontal: 0,
             // iOS shadow properties

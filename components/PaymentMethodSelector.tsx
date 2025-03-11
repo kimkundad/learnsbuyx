@@ -34,7 +34,6 @@ const PaymentMethodSelector = ({ onSelect }) => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Other Ways To Pay</Text>
             {banks.map((bank) => (
                 <TouchableOpacity
                     key={bank.id}

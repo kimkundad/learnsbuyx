@@ -208,7 +208,7 @@ const CourseDetail = () => {
 
             <View style={styles.fixedButtonContainer}>
                 <TouchableOpacity style={styles.enrollButton} onPress={() => router.push({
-                        pathname: '(payment)/',
+                        pathname: Platform.OS === 'ios' ? '(payIos)/' : '(payment)/',
                         params: { data: JSON.stringify(data) }
                       })}>
                     <Text style={styles.enrollButtonText}>จองคอร์สเรียน</Text>

@@ -14,7 +14,7 @@ export const UserProvider = ({ children }) => {
     const fetchUserProfile = async () => {
       try {
         const dataUser = await AsyncStorage.getItem('user_profile');
-        console.log('📢 Retrieved user profile:', dataUser);
+      //  console.log('📢 Retrieved user profile:', dataUser);
   
         if (dataUser) {
           setUserProfile(JSON.parse(dataUser));
@@ -31,7 +31,7 @@ export const UserProvider = ({ children }) => {
 
   // ✅ ใช้ useEffect เพื่อตรวจสอบว่า userProfile เปลี่ยนแปลง
   useEffect(() => {
-    console.log("🔄 userProfile Updated:", userProfile);
+   // console.log("🔄 userProfile Updated:", userProfile);
   }, [userProfile]);
 
   const logout = async () => {

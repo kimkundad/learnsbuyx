@@ -15,7 +15,7 @@ const MethodDetail = () => {
 
     const params = useLocalSearchParams();
     const [paymentData, setPaymentData] = useState(null);
-    const [currentStep, setCurrentStep] = useState(2); // 2 คือ Payment Method
+    const [currentStep, setCurrentStep] = useState(1); // 2 คือ Payment Method
     const [transferDate, setTransferDate] = useState(new Date());
     const [transferTime, setTransferTime] = useState(new Date());
     const [receiptImage, setReceiptImage] = useState(null);
@@ -26,10 +26,11 @@ const MethodDetail = () => {
 
     useEffect(() => {
         if (params?.data) {
+          //  console.log('params?.data', JSON.parse(params.data));
             try {
-                const parsedData = JSON.parse(params.data); // แปลงกลับเป็น object
+                const parsedData = JSON.parse(params.data) // แปลงกลับเป็น object
                 setPaymentData(parsedData);
-                console.log("รับข้อมูล:", parsedData);
+              //  console.log("รับข้อมูล:", parsedData);
             } catch (error) {
                 console.error("Error parsing data:", error);
             }
@@ -61,11 +62,13 @@ const MethodDetail = () => {
     const StepIndicator = () => {
             return (
                 <View style={styles.stepContainer}>
+                    
+        
                     <View style={styles.step}>
                         <View style={[styles.stepCircle, currentStep >= 1 ? styles.activeStep : styles.inactiveStep]}>
                             <Text style={[styles.stepText, currentStep >= 1 ? styles.activeText : styles.inactiveText]}>1</Text>
                         </View>
-                        <Text style={[styles.stepLabel, currentStep >= 1 ? styles.activeLabel : styles.inactiveLabel]}>Details</Text>
+                        <Text style={[styles.stepLabel, currentStep >= 1 ? styles.activeLabel : styles.inactiveLabel]}>Payment Method</Text>
                     </View>
         
                     <View style={styles.stepLine} />
@@ -74,16 +77,7 @@ const MethodDetail = () => {
                         <View style={[styles.stepCircle, currentStep >= 2 ? styles.activeStep : styles.inactiveStep]}>
                             <Text style={[styles.stepText, currentStep >= 2 ? styles.activeText : styles.inactiveText]}>2</Text>
                         </View>
-                        <Text style={[styles.stepLabel, currentStep >= 2 ? styles.activeLabel : styles.inactiveLabel]}>Payment Method</Text>
-                    </View>
-        
-                    <View style={styles.stepLine} />
-        
-                    <View style={styles.step}>
-                        <View style={[styles.stepCircle, currentStep >= 3 ? styles.activeStep : styles.inactiveStep]}>
-                            <Text style={[styles.stepText, currentStep >= 3 ? styles.activeText : styles.inactiveText]}>3</Text>
-                        </View>
-                        <Text style={[styles.stepLabel, currentStep >= 3 ? styles.activeLabel : styles.inactiveLabel]}>Confirmation</Text>
+                        <Text style={[styles.stepLabel, currentStep >= 2 ? styles.activeLabel : styles.inactiveLabel]}>Confirmation</Text>
                     </View>
                 </View>
             );
@@ -108,7 +102,7 @@ const MethodDetail = () => {
 
 
         const submitPayment = async () => {
-            if (!selectedPayment || !paymentData?.final_price || !transferDate || !transferTime || !receiptImage) {
+            if (!selectedPayment || !paymentData?.courses?.price_course || !transferDate || !transferTime || !receiptImage) {
                 Alert.alert("Error", "กรุณากรอกข้อมูลให้ครบทุกช่อง");
                 return;
             }
@@ -124,10 +118,10 @@ const MethodDetail = () => {
             formData.append("token", token); // ถ้ามีคูปอง
             formData.append("coupon_id", paymentData?.coupon_id || ""); // ถ้ามีคูปอง
             formData.append("bankname", selectedPayment?.id); // ✅ บังคับ
-            formData.append("totalmoney", paymentData?.final_price); // ✅ บังคับ
+            formData.append("totalmoney", paymentData?.courses?.price_course); // ✅ บังคับ
             formData.append("day", formatDate(transferDate)); // ✅ ใช้ฟังก์ชัน formatDate
             formData.append("timer", transferTime.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' })); // ✅ เวลาที่โอน
-            formData.append("course_id", paymentData?.course_id); // ✅ บังคับ
+            formData.append("course_id", paymentData?.courses?.id); // ✅ บังคับ
             formData.append("image", {
                 uri: Platform.OS === "ios" ? receiptImage.replace("file://", "") : receiptImage, // แก้ไขเส้นทางไฟล์บน iOS
                 type: mimeType,
@@ -210,7 +204,7 @@ const MethodDetail = () => {
                         <Text style={styles.label}>ค่าสมัคร</Text>
                         <TextInput
                             style={styles.input}
-                            value={paymentData?.final_price ? paymentData.final_price.toString() : 0}
+                            value={paymentData?.courses?.price_course ? paymentData?.courses?.price_course.toString() : 0}
                             editable={false} // Readonly
                         />
                     </View>
@@ -424,7 +418,10 @@ boxItemListPay: {
             fontSize: 18
         },
         headerGradient: {
-            height: 85,
+            height: Platform.select({
+                ios: 85,
+                android: 55,
+            }),
             width: '100%',
         },
         textListHead: {
@@ -437,7 +434,7 @@ boxItemListPay: {
         listItemCon: {
             marginTop: Platform.select({
                 ios: 35,
-                android: 35,
+                android: 10,
             }),
             paddingHorizontal: 0,
             // iOS shadow properties

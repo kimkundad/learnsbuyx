@@ -185,13 +185,13 @@ const Payment = () => {
                             <View style={styles.inputContainer}>
                                 <TextInput
                                     style={styles.input}
-                                    placeholder="Student Discount Code"
+                                    placeholder="คูปอง"
                                     placeholderTextColor="#999"
                                     value={coupon}
                                     onChangeText={setCoupon}
                                 />
                                 <TouchableOpacity style={styles.applyButton} onPress={applyDiscount}>
-                                    <Text style={styles.applyText}>Apply</Text>
+                                    <Text style={styles.applyText}>ยืนยัน</Text>
                                 </TouchableOpacity>
                             </View>
                         ) : (
@@ -315,6 +315,7 @@ const styles = StyleSheet.create({
         padding: 10,
         fontSize: 16,
         color: '#333',
+        fontFamily: 'Prompt_400Regular',
     },
     applyButton: {
         backgroundColor: '#007bff',
@@ -429,10 +430,7 @@ const styles = StyleSheet.create({
         resizeMode: 'cover',
     },
     headerGradient: {
-        height: Platform.select({
-            ios: 85,
-            android: 55,
-        }),
+        height: 85,
         width: '100%',
     },
     textListHead: {
@@ -445,7 +443,7 @@ const styles = StyleSheet.create({
     listItemCon: {
         marginTop: Platform.select({
             ios: 35,
-            android: 10,
+            android: 35,
         }),
         paddingHorizontal: 0,
         // iOS shadow properties
